@@ -17,18 +17,22 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               FloatingActionButton(
+                backgroundColor: Colors.orange,
                 onPressed: () {},
                 child: const Icon(Icons.refresh),
               ),
               FloatingActionButton(
+                backgroundColor: Colors.red,
                 onPressed: () {},
-                child: const Icon(Icons.refresh),
+                child: const Icon(Icons.play_arrow),
               ),
               FloatingActionButton(
+                backgroundColor: Colors.green,
                 onPressed: () {},
-                child: const Icon(Icons.refresh),
+                child: const Icon(Icons.add),
               ),
             ],
           )
