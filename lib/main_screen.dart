@@ -16,9 +16,23 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: Column(
         children: [
+          const SizedBox(height: 30),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                '0',
+                style: TextStyle(fontSize: 50),
+              ),
+              Text(
+                '00',
+                style: TextStyle(fontSize: 10),
+              ),
+            ],
+          ),
           // Spacer를 두면 바로 맨 밑으로 내려간다 그리고 Column밑에 Row가 해당
-          Spacer(),
-
+          const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
