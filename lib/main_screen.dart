@@ -15,7 +15,24 @@ class _MainScreenState extends State<MainScreen> {
         title: const Text('스탑와치'),
       ),
       body: Column(
-        children: [],
+        children: [
+          Row(
+            children: [
+              FloatingActionButton(
+                onPressed: () {},
+                child: const Icon(Icons.refresh),
+              ),
+              FloatingActionButton(
+                onPressed: () {},
+                child: const Icon(Icons.refresh),
+              ),
+              FloatingActionButton(
+                onPressed: () {},
+                child: const Icon(Icons.refresh),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
