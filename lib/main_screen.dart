@@ -16,9 +16,13 @@ class _MainScreenState extends State<MainScreen> {
       ),
       body: Column(
         children: [
+          // Spacer를 두면 바로 맨 밑으로 내려간다 그리고 Column밑에 Row가 해당
+          Spacer(),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              const Spacer(),
               FloatingActionButton(
                 backgroundColor: Colors.orange,
                 onPressed: () {},
@@ -35,7 +39,8 @@ class _MainScreenState extends State<MainScreen> {
                 child: const Icon(Icons.add),
               ),
             ],
-          )
+          ),
+          const SizedBox(height: 30),
         ],
       ),
     );
