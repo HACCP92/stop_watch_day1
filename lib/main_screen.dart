@@ -27,8 +27,24 @@ class _MainScreenState extends State<MainScreen> {
     }
   }
 
-  void _start() {}
-  void _pause() {}
+  void _start() {
+    _timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
+      setState(() {
+        _time++;
+      });
+    });
+  }
+
+  void _pause() {
+    _timer?.cancel();
+  }
+
+  void _reset() {
+    _isRunning = false;
+    _timer?.cancel();
+    _lapTimes.clear();
+    _time = 0;
+  }
 
   @override
   void dispose() {
@@ -39,6 +55,8 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    int sec = _time ~/ 100;
+    String hundredth = '${_time % 100}'.padRight(2, '0');
     return Scaffold(
       appBar: AppBar(
         title: const Text('스탑와치'),
@@ -46,16 +64,16 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         children: [
           const SizedBox(height: 30),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                '0',
+                '$sec',
                 style: TextStyle(fontSize: 50),
               ),
               Text(
-                '00',
+                '$hundredth',
                 style: TextStyle(fontSize: 10),
               ),
             ],
@@ -106,7 +124,11 @@ class _MainScreenState extends State<MainScreen> {
               ),
               FloatingActionButton(
                   backgroundColor: Colors.orange,
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      _reset();
+                    });
+                  },
                   child: const Icon(Icons.refresh)),
               FloatingActionButton(
                 backgroundColor: Colors.red,
