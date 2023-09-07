@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -8,6 +10,33 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  Timer? _timer;
+
+  int _time = 0;
+  bool _isRunning = false;
+
+  List<String> _lapTimes = [];
+
+  void _clickButton() {
+    _isRunning = !_isRunning;
+
+    if (_isRunning) {
+      _start();
+    } else {
+      _pause();
+    }
+  }
+
+  void _start() {}
+  void _pause() {}
+
+  @override
+  void dispose() {
+    _timer
+        ?.cancel(); // null이 아닐때는 캔슬을 null 이면 아무것도 하지 않는다. 그래서 캔슬의 나면 화면을 빠져 나간다.
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -81,8 +110,14 @@ class _MainScreenState extends State<MainScreen> {
                   child: const Icon(Icons.refresh)),
               FloatingActionButton(
                 backgroundColor: Colors.red,
-                onPressed: () {},
-                child: const Icon(Icons.play_arrow),
+                onPressed: () {
+                  setState(() {
+                    _clickButton();
+                  });
+                },
+                child: _isRunning
+                    ? const Icon(Icons.pause)
+                    : const Icon(Icons.play_arrow),
               ),
               FloatingActionButton(
                 backgroundColor: Colors.green,
