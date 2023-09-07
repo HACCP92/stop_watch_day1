@@ -15,7 +15,7 @@ class _MainScreenState extends State<MainScreen> {
   int _time = 0;
   bool _isRunning = false;
 
-  List<String> _lapTimes = [];
+  final List<String> _lapTimes = [];
 
   void _clickButton() {
     _isRunning = !_isRunning;
@@ -46,6 +46,10 @@ class _MainScreenState extends State<MainScreen> {
     _time = 0;
   }
 
+  void _recordLapTime(String time) {
+    _lapTimes.insert(0, '${_lapTimes.length + 1}등 $_time');
+  }
+
   @override
   void dispose() {
     _timer
@@ -73,7 +77,7 @@ class _MainScreenState extends State<MainScreen> {
                 style: TextStyle(fontSize: 50),
               ),
               Text(
-                '$hundredth',
+                hundredth,
                 style: TextStyle(fontSize: 10),
               ),
             ],
@@ -82,20 +86,9 @@ class _MainScreenState extends State<MainScreen> {
             width: 100,
             height: 100,
             child: ListView(
-              children: const [
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-                Center(child: Text('111')),
-              ],
+              children: _lapTimes
+                  .map((time) => Center(child: Center(child: Text(time))))
+                  .toList(),
             ),
           ),
           // Spacer를 두면 바로 맨 밑으로 내려간다 그리고 Column밑에 Row가 해당
@@ -143,7 +136,11 @@ class _MainScreenState extends State<MainScreen> {
               ),
               FloatingActionButton(
                 backgroundColor: Colors.green,
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _recordLapTime('$sec.$hundredth');
+                  });
+                },
                 child: const Icon(Icons.add),
               ),
             ],
